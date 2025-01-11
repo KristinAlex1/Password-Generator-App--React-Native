@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 
 import * as Yup from 'yup'
+import Heading from './components/Heading';
 
 
 
@@ -66,9 +67,12 @@ export default function App() {
     }
 
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <SafeAreaView>
+        <ScrollView>
+        <Heading/>
+        </ScrollView>
+        
+    </SafeAreaView>
   )
 }
 
