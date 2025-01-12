@@ -96,7 +96,7 @@ export default function App() {
               handleChange,
               handleSubmit,
               handleReset,
-              /* and other goodies */
+              
             }) => (
               <>
                 <View style={styles.inputWrapper}>

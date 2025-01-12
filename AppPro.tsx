@@ -1,9 +1,51 @@
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import App from './App'
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 export default function AppPro() {
+    const[password, setPassword] = useState('');
+    const [isPasswordGenerated, setPasswordGenerated] = useState(false);
+    const [lowercase, setLowercase] = useState(true);
+    const [uppercase, setUppercase] = useState(false);
+    const [number, setNumber] = useState(false);
+    const [symbols, setSymbols] = useState(false);
+
+    const generatedPasswordString = (passwordLength:number) => {
+
+        let characterList = '';
+
+        const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
+        const digitsChars = '0123456789';
+        const specialChars = '!@#$%^&*()_+';
+
+        if(uppercase){
+            characterList += upperCaseChars;
+        }
+        if(lowercase){
+            characterList += lowerCaseChars;
+        }
+        if(number){
+            characterList += digitsChars;
+        }
+        if(symbols){
+            characterList += specialChars;
+        }
+
+        const passwordResult = createPassword(characterList, passwordLength);
+    }
+
+
+    const createPassword = (characters: string, passwordLength: number) => {
+
+        let result = '';
+        for( let i = 0; i < passwordLength; i++){
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+      }
+ }
   return (
     <ScrollView>
         <SafeAreaView style = {styles.Appcontainer}>
