@@ -55,6 +55,14 @@ export default function AppPro() {
     setPassword(passwordResult);
   };
 
+  const resetPasswordState = () => {
+    setPassword('');
+    setLowercase(true);
+    setUppercase(false);
+    setNumber(false);
+    setSymbols(false);
+  }
+
   const createPassword = (characters: string, passwordLength: number) => {
     let result = '';
     for (let i = 0; i < passwordLength; i++) {
@@ -114,6 +122,8 @@ export default function AppPro() {
                   <Text style={styles.CheckBoxHeading}>Include Lowercase</Text>
                   <BouncyCheckbox
                     disableBuiltInState
+                    isChecked={lowercase}
+                    onPress={()=> setLowercase(!lowercase)}
                     fillColor="#29ab87"
                     style={styles.LowercaseCheckbox}
                   />
@@ -122,6 +132,8 @@ export default function AppPro() {
                   <Text style={styles.CheckBoxHeading}>Include Uppercase</Text>
                   <BouncyCheckbox
                     disableBuiltInState
+                    isChecked={uppercase}
+                    onPress={()=> setUppercase(!uppercase)}
                     fillColor="yellow"
                     style={styles.LowercaseCheckbox}
                   />
@@ -130,6 +142,8 @@ export default function AppPro() {
                   <Text style={styles.CheckBoxHeading}>Include Numbers </Text>
                   <BouncyCheckbox
                     disableBuiltInState
+                    isChecked={number}
+                    onPress={()=> setNumber(!number)}
                     fillColor="pink"
                     style={styles.LowercaseCheckbox}
                   />
@@ -138,14 +152,27 @@ export default function AppPro() {
                   <Text style={styles.CheckBoxHeading}>Include Symbols </Text>
                   <BouncyCheckbox
                     disableBuiltInState
+                    isChecked={symbols}
+                    onPress={()=> setSymbols(!symbols)}
                     fillColor="red"
                     style={styles.LowercaseCheckbox}
                   />
                 </View>
               </View>
             <View style={styles.formActions}>
-                <TouchableOpacity><Text>Generate Password</Text></TouchableOpacity>
-                <TouchableOpacity><Text>Reset</Text></TouchableOpacity>
+                <TouchableOpacity
+                disabled={!isValid}
+                style={styles.generateButton}
+                onPress={handleSubmit}
+                ><Text>Generate Password</Text></TouchableOpacity>
+                <TouchableOpacity
+                style={styles.resetButton}
+                onPress={ ()=> {
+                    handleReset();
+                    resetPasswordState();
+                    
+                }}
+                ><Text>Reset</Text></TouchableOpacity>
             </View>
             </>
           )}
@@ -200,7 +227,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    width: 100,
+    width: 90,
     backgroundColor: 'gray',
     borderRadius: 5,
   },
